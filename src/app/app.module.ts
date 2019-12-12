@@ -46,10 +46,10 @@ import { BussinessAccountComponent } from './Components/user/bussiness-account/b
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 const socketconfig: SocketIoConfig = {
-  url: 'http://localhost:3000/',
+  url: 'https://wherebybackend.herokuapp.com/',
   options: {}
 };
-
+// http://localhost:3000/
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
