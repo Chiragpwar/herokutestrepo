@@ -53,7 +53,7 @@ const socketconfig: SocketIoConfig = {
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider(' 457073428004-kv306i0rbr9efoa85pvjj1ip2ht2p6ud.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider('457073428004-kv306i0rbr9efoa85pvjj1ip2ht2p6ud.apps.googleusercontent.com')
   } // 457073428004-5ap126b1r4g55l46170k7o82nms227cc.apps.googleusercontent.com
 ]);
 
