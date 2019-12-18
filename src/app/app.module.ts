@@ -44,6 +44,8 @@ import { PackageComponent } from './Components/user/package/package.component';
 import { NgxStripeModule } from 'ngx-stripe';
 import { BussinessAccountComponent } from './Components/user/bussiness-account/bussiness-account.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const socketconfig: SocketIoConfig = {
   url: 'https://wherebybackend.herokuapp.com/',
@@ -108,7 +110,8 @@ export function provideConfig() {
     ReactiveFormsModule,
     PickerModule,
     NgxStripeModule.forRoot('pk_test_xR2HN61CGq9RMib7obP5ieDz00Xhs4nu2t'),
-    SocketIoModule.forRoot(socketconfig)
+    SocketIoModule.forRoot(socketconfig),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [{
     provide: AuthServiceConfig,
