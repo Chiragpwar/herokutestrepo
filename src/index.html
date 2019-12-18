@@ -10,6 +10,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <script src="https://apis.google.com/js/platform.js" async="" defer=""></script>
   <script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
+<script>
+  window.addEventListener('beforeinstallprompt', (e) => {
+  // Stash the event so it can be triggered later.
+  e.preventDefault();
+  console.log('eeeee', e)
+  showInstallPromotion();
+});
+</script>
   <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src	'self' 'unsafe-inline' *; img-src 'self' data: *">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>
