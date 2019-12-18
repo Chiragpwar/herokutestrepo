@@ -13,9 +13,7 @@
 <script>
   window.addEventListener('beforeinstallprompt', (e) => {
   // Stash the event so it can be triggered later.
-  e.preventDefault();
-  console.log('eeeee', e)
-  showInstallPromotion();
+    prompt();
 });
 </script>
   <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src	'self' 'unsafe-inline' *; img-src 'self' data: *">
