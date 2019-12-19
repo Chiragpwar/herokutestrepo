@@ -7,7 +7,7 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "prefer_related_applications": true,
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "assets/icons/icons-72x72.png",

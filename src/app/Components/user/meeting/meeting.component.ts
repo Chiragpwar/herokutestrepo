@@ -1,8 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {AuthServices} from '../../../service/CommenService';
 import { ToastrService } from 'ngx-toastr';
+import {fromEvent, Observable, Subscription} from 'rxjs';
+import {DataService} from '../../../service/sharedservice';
 
 @Component({
   selector: 'app-meeting',
@@ -16,12 +18,13 @@ export class MeetingComponent implements OnInit {
  DisableButton = true;
  params: string;
  FeaturePlan = false;
-
   constructor(public route: Router, private routes: ActivatedRoute, public spinner: NgxSpinnerService, public service: AuthServices
               // tslint:disable-next-line: align
-              , public tostr: ToastrService) { }
+              , public tostr: ToastrService, public NetworkShares: DataService) { }
 
   ngOnInit() {
+
+
     this.routes.paramMap.subscribe(params => {
       // tslint:disable-next-line: no-string-literal
       this.params = params['params'].roomname;
@@ -87,5 +90,6 @@ export class MeetingComponent implements OnInit {
   public showFeture() {
   this.FeaturePlan = this.FeaturePlan === true ? false : true;
   }
+
 
 }
