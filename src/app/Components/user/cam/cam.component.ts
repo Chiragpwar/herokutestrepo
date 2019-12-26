@@ -11,6 +11,7 @@ import { DomSanitizer} from '@angular/platform-browser';
 import {DataService} from '../../../service/sharedservice';
 
 declare var $: any;
+declare var window: Window;
 declare global {
   interface Window {
     RTCPeerConnection: RTCPeerConnection;
