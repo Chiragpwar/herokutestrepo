@@ -1595,8 +1595,19 @@ a.logo--1d42y {
     font-size: 14px !important;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
-.googleset.navItem--SFDxq {
-    margin-left: auto;
+.googleset.navItem--SFDxq {margin-left:auto;}
+a.navbar-brand {padding:0;}
+a.navbar-brand img{ max-width:220px; vertical-align: top;}
+.navbar-collapse.collapse{ margin:0 0 0 auto;}
+.navbar { border-radius:0; width:100%; display:flex; border:0; margin:0 0 20px; align-items:center;}
+.navbar-nav { margin:0; list-style:none;}
+ul.navbar-nav li{ margin:0;}
+ul.navbar-nav li + li{ margin-left:15px;}
+ul.navbar-nav li a{ padding:0 15px; line-height:40px; margin:0; display:block;}
+
+
+@media(min-width:768px){
+    .navbar-toggler{ display:none;}
 }
 
 @media(max-width:991px){
@@ -1605,3 +1616,14 @@ a.logo--1d42y {
 }
 
 
+@media(max-width:767px){    
+    .navbar-collapse{ border: 0; padding: 0; background: transparent; position: absolute; top: 100%; z-index: 1; right: 0;}
+    .navbar-collapse ul{ border:1px solid #eee; margin:0; z-index: 1; background: #fff; box-shadow: 0 0 30px 0 rgba(0,0,0,.2); padding: 10px;}
+    .navbar-nav {margin: 0; list-style: none; width: 100%; padding: 0;}
+    ul.navbar-nav li + li {margin-left: 0;}
+    .navbar { display:block; margin:0;}
+    button.navbar-toggler{ padding: 0 0 0 15px; background:transparent; border:0; margin:0 0 0 auto; cursor:pointer;    position: absolute;top: 8px; right: 0;}
+    span.navbar-toggler-icon {border-bottom: 3px solid #ff2e63; position: relative; height: 25px; padding: 0; width: 25px; display: block;}
+    span.navbar-toggler-icon:before { content: ''; width: 40px; height: 3px; background: #ff2e63; position: absolute; top: 11px; right: 0;}
+    span.navbar-toggler-icon:after { content: ''; width:100%; height:3px; background:#ff2e63; position:absolute; top:0; right:0;}
+}

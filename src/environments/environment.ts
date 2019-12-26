@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  ApiUrl: 'https://whereby-demo.herokuapp.com/' // 'http://localhost:3000/'
+  ApiUrl: 'http://localhost:3000/' // 'https://wherebybackend.herokuapp.com/'
 };
 
 /*

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Chatroom, Mediastream} from '../../../modals/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,13 @@ import { DomSanitizer} from '@angular/platform-browser';
 import {DataService} from '../../../service/sharedservice';
 
 declare var $: any;
+declare global {
+  interface Window {
+    RTCPeerConnection: RTCPeerConnection;
+    mozRTCPeerConnection: RTCPeerConnection;
+    webkitRTCPeerConnection: RTCPeerConnection;
+  }
+}
 @Component({selector: 'app-cam', templateUrl: './cam.component.html', styleUrls: ['./cam.component.scss']})
 
 export class CamComponent implements OnInit {
@@ -18,7 +25,7 @@ export class CamComponent implements OnInit {
   constructor(private route: ActivatedRoute, private Routes: Router, private toastr: ToastrService,
               private spinner: NgxSpinnerService, private clipboardService: ClipboardService, private socket: Socket,
               private service: AuthServices, private sanitizer: DomSanitizer,
-              private dataservice: DataService) {}
+              private dataservice: DataService, private zone: NgZone) {}
 
   @ViewChild('startButton', null) startButton: ElementRef;
   @ViewChild('callButton', null) callButton: ElementRef;
@@ -29,7 +36,7 @@ export class CamComponent implements OnInit {
   @ViewChild('video', null) video;
   @ViewChild('videoModal', null) videoModal;
   @ViewChild('submit_message', null) submitmessage: ElementRef;
-
+ // window: Window & typeof globalThis;
   private stream: MediaStream;
   streams = new Mediastream();
   chatcount = true;
@@ -83,6 +90,8 @@ export class CamComponent implements OnInit {
  Camon = '';
  emojiopen = false;
 
+ private ipRegex = new RegExp(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/);
+
  async ngOnInit() {
     this.Camon = 'enable';
     this.content = document.querySelector('#chat');
@@ -135,11 +144,11 @@ export class CamComponent implements OnInit {
     this.socket.on('stopScreen', async (val) => {
       if (val.val != null) {
           const remotevideo: HTMLVideoElement = this.remotevideo.nativeElement;
-          remotevideo.style.height = '269px';
+          remotevideo.style.height = '100%';
           remotevideo.srcObject = null;
           remotevideo.style.backgroundImage = 'linear-gradient(40deg, #1f83c2, transparent)';
           const localvideo: HTMLVideoElement = this.localvideo.nativeElement;
-          localvideo.style.height = '269px';
+          localvideo.style.height = '100%';
           localvideo.srcObject = null;
           localvideo.style.backgroundImage = 'linear-gradient(40deg, #1f83c2, transparent)';
       }
@@ -231,14 +240,39 @@ export class CamComponent implements OnInit {
    }
 
 async getip() {
-  await this.service.GetIp().subscribe(res => {
-    if (this.currentUser == null) {
+  window.RTCPeerConnection = this.getRTCPeerConnection();
+  const pc = new RTCPeerConnection({ iceServers: [] });
+  pc.createDataChannel('');
+  pc.createOffer().then(pc.setLocalDescription.bind(pc));
+  pc.onicecandidate = (ice) => {
+    this.zone.run(() => {
+      if (!ice || !ice.candidate || !ice.candidate.candidate) {
+        return;
+      }
+      if (this.currentUser == null) {
        // tslint:disable-next-line: no-string-literal
-      this.name = res['ip'];
+       this.name = this.ipRegex.exec(ice.candidate.candidate)[1];
     } else {
       this.name =  this.Currentowner;
     }
-});
+      pc.onicecandidate = () => {};
+      pc.close();
+    });
+  };
+//   await this.service.GetIp().subscribe(res => {
+//     if (this.currentUser == null) {
+//        // tslint:disable-next-line: no-string-literal
+//       this.name = res['ip'];
+//     } else {
+//       this.name =  this.Currentowner;
+//     }
+// });
+}
+
+private getRTCPeerConnection() {
+  return window.RTCPeerConnection ||
+    window.mozRTCPeerConnection ||
+    window.webkitRTCPeerConnection;
 }
 
 openemoji() {
