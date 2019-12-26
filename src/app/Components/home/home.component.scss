@@ -489,27 +489,27 @@ button, input, optgroup, select, textarea {
     display: none;
 }
 @media (min-width: 768px) {
-.logoImg--text--1eqDD {
-        display: block
+    .logoImg--text--1eqDD { display:block}
 }
-    }
+a.logo--1d42y {
+    width:100%;
+}
 .logoContainer--AZi3B {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    width:100%;
 }
 .logoText--3qCfw {
     -ms-flex-item-align: center;
-        align-self: center;
+    align-self: center;
     color: #222;
     font-size: 16px;
     margin-left: 10px;
 }
 @media (min-width: 768px) {
-.logoText--3qCfw {
-        font-size: 18px
+    .logoText--3qCfw { font-size: 18px}
 }
-    }
 
 /* Spacing scale */
 /* Private class to reset <button> element styles */
@@ -1568,11 +1568,40 @@ button, input, optgroup, select, textarea {
     margin: 0 auto;
 }
 
-.googleset{
-    margin-left: 324% !important;
-}
+
 
 *:focus {
     outline: none;
 }
+
+.logo-managr{
+    color: #ff2e63;
+    font-size: 29px;
+    font-family: cursive;
+    font-weight: bold;
+}
+.logoContainer--AZi3B img{
+    max-width: 250px;
+    margin: 0;
+}
+.img-logo{
+    height: 43px;
+    width: 62px;
+    padding-right: 8px;
+}
+
+.username{
+    font-weight: 600;
+    font-size: 14px !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+.googleset.navItem--SFDxq {
+    margin-left: auto;
+}
+
+@media(max-width:991px){
+    .logoContainer--AZi3B img{max-width: 200px; margin: 0;}
+    .navItem--SFDxq {margin:0 15px;}
+}
+
 

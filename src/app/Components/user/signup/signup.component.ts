@@ -5,6 +5,8 @@ import {AuthServices} from '../../../service/CommenService';
 import { ToastrService } from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {User} from '../../../modals/modal';
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-signup',
@@ -16,22 +18,41 @@ export class SignupComponent implements OnInit {
   GoogleAuth = [];
   user = new User();
 
-  constructor(public authService: AuthService, public route: Router, public service: AuthServices, public toastr: ToastrService) { }
+  constructor(public authService: AuthService, public route: Router, public service: AuthServices, public toastr: ToastrService,
+              public  afAuth: AngularFireAuth) { }
 
   ngOnInit() {
 
   }
 
   async  signInWithGoogle() {
-   await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x =>
-    this.service.AddUser(x).subscribe(Response => {
-     // tslint:disable-next-line: no-string-literal
+    await  this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(x => {
+      this.user.firstName = x.user.displayName.split(' ')[0];
+      this.user.lastName = x.user.displayName.split(' ')[1];
+      this.user.name = x.user.displayName;
+      this.user.email = x.user.email;
+      this.user.photoUrl = x.user.photoURL;
+      this.user.provider = x.credential.signInMethod;
+      this.service.AddUser(this.user).subscribe(Response => {
+        // tslint:disable-next-line: no-string-literal
         if (Response['user'] === 'user already register') {
           this.toastr.warning('This email is already registered. Try logging in');
         } else {
           this.toastr.info('you need to login For next step');
         }
-      }));
+      });
+    });
+
+
+    // await this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(x =>
+    // this.service.AddUser(x).subscribe(Response => {
+    //  // tslint:disable-next-line: no-string-literal
+    //     if (Response['user'] === 'user already register') {
+    //       this.toastr.warning('This email is already registered. Try logging in');
+    //     } else {
+    //       this.toastr.info('you need to login For next step');
+    //     }
+    //   }));
     }
 
   public SignUp(name, Email) {

@@ -9,7 +9,7 @@ import {HomeComponent} from '../../home/home.component';
 
 export class LayoutComponent implements OnInit {
 
-  constructor(private home: HomeComponent) { }
+  constructor(private home: HomeComponent) {}
 
   ngOnInit() {
     this.home.Changelayout();

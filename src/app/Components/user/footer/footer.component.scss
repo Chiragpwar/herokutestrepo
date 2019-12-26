@@ -2164,3 +2164,14 @@ h1, h2, h3, h4 {
     margin: 0 auto;
 }
 
+
+
+@media(max-width:767px){
+    .PageFooter--q6-VT{ padding:30px 0; margin:0;}
+    .PageFooter--q6-VT .container--2gbHf{ flex-direction:row; flex-wrap:wrap;}
+    .PageFooter--q6-VT .nav--CPVyU{ width:50%; text-align:left; margin:0 0 30px;}
+    .PageFooter--q6-VT .navTitle--1W31B { font-size:16px; padding:0 0 10px;}
+    .PageFooter--q6-VT .navItem--2TmsE { font-size:14px; padding:0; }
+    .navItem--2TmsE + .navItem--2TmsE{ padding-top:10px;}
+    .PageFooter--q6-VT .nav--CPVyU:last-child{ width:100%; text-align:center; margin-bottom:0;}
+}

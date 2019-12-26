@@ -46,6 +46,8 @@ import { BussinessAccountComponent } from './Components/user/bussiness-account/b
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 const socketconfig: SocketIoConfig = {
   url: 'https://wherebybackend.herokuapp.com/',
@@ -55,9 +57,21 @@ const socketconfig: SocketIoConfig = {
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('457073428004-kv306i0rbr9efoa85pvjj1ip2ht2p6ud.apps.googleusercontent.com')
-  } // 457073428004-5ap126b1r4g55l46170k7o82nms227cc.apps.googleusercontent.com
+    provider: new GoogleLoginProvider('227820843238-cf4p34h5see8ts5a4okf9g070fveejaj.apps.googleusercontent.com')
+  } // '457073428004-kv306i0rbr9efoa85pvjj1ip2ht2p6ud.apps.googleusercontent.com'
 ]);
+
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyCnMTKLzNWYwBaRFifQQfRZJvRvDe9bVLo',
+  authDomain: 'easymeet-30b6d.firebaseapp.com',
+  databaseURL: 'https://easymeet-30b6d.firebaseio.com',
+  projectId: 'easymeet-30b6d',
+  storageBucket: 'easymeet-30b6d.appspot.com',
+  messagingSenderId: '498366038838',
+  appId: '1:498366038838:web:7ea5cf58c367e2e384a997',
+  measurementId: 'G-Y9DPSLWVL8'
+}
 
 export function provideConfig() {
   return config;
@@ -109,6 +123,8 @@ export function provideConfig() {
     FormsModule,
     ReactiveFormsModule,
     PickerModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
     NgxStripeModule.forRoot('pk_test_xR2HN61CGq9RMib7obP5ieDz00Xhs4nu2t'),
     SocketIoModule.forRoot(socketconfig),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

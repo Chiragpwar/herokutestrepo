@@ -92,7 +92,6 @@ export class CamComponent implements OnInit {
     this.GetuserDetial();
     this.Socketjoin();
     this.RoomCheck();
-    this.getip();
     this.initializeplayer();
    // this.socketmsg();
 
@@ -207,6 +206,7 @@ export class CamComponent implements OnInit {
         if (Response['Roomname'] !=  null) {
           // tslint:disable-next-line: no-string-literal
           this.Currentowner = Response['name'];
+          this.getip();
           // tslint:disable-next-line: no-string-literal
           this.chatpic = Response['photoUrl'];
           navigator.mediaDevices.getUserMedia({video: true, audio: true });
@@ -271,6 +271,9 @@ async Screenshare() {
   .catch((e) => {
      this.toastr.warning('The browser is having trouble accessing your screen', 'Trouble with screen sharing');
     });
+   if (this.stream === undefined) {
+    return false;
+  }
    if (this.currentUser != null) {
     this.localvideo.nativeElement.srcObject  =  this.stream;
     this.setposter('assets/loader.gif', 'remotevideo');
@@ -286,18 +289,28 @@ async Screenshare() {
    this.stream.getVideoTracks()[0].addEventListener('ended', () => this.ClearSharedata());
 }
 
+
 ClearSharedata() {
   const recordRTC = this.recordRTC;
   clearInterval(this.app);
   recordRTC.clearRecordedData();
-  this.socket.emit('stopScreen', {
-    screen : 'screen'
-   });
-  this.socket.emit('sharescreen', {
-    MediaStream : null
-   });
   return false;
 }
+
+// ClearSharedata() {
+//   const recordRTC = this.recordRTC;
+//   clearInterval(this.app);
+//   recordRTC.clearRecordedData();
+//   this.socket.emit('stopScreen', {
+//     screen : 'screen'
+//    });
+//   this.socket.emit('sharescreen', {
+//     MediaStream : null
+//    });
+//   return false;
+// }
+
+
 
 async Liverecords() {
   const options = {
@@ -316,6 +329,7 @@ async Liverecords() {
      // tslint:disable-next-line: only-arrow-functions
     await this.recordRTC.getDataURL(function(dataURL) {
       url = dataURL;
+      console.log(url);
     });
   }, 6000);
 

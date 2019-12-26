@@ -21,11 +21,11 @@
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Switch preferred camera and microphone</h4>
-            <video #videoModal style="width:50%; margin-left: 130px;" autoplay="autoplay"></video> 
+            <video #videoModal autoplay="autoplay"></video> 
           </div>
       <div class="modal-body">
           <p class="centered help-text">If you are having problems, try restarting your browser.</p>
-          <div class="col-md-12 camsec">
+          <div class="row camsec">
             <div class="col-md-6">
                 <h3>camera</h3>
                 <select class="form-control">
@@ -39,7 +39,7 @@
           </select>
               </div>
           </div>
-          <div class="col-md-12 videosec">
+          <div class="row videosec">
             <div class="col-md-6">
                 <h3>Video Quality</h3>
                 <label class="radio-inline"><input type="radio" name="optradio" checked>Good</label>
@@ -54,7 +54,7 @@
           </div>
       </div>
       <div class="modal-footer">
-        <div class="col-md-12 footerchnag">
+        <div class="row footerchnag">
           <div class="col-md-8">
               <p class="help-text">Updating preferences may refresh your browser window. You will automatically rejoin the conversation.</p>
           </div>
@@ -77,35 +77,28 @@
             <div class="logo-wrapper jstest-logo-wrapper">
               <a [routerLink]="['/']" target="_self" title="Go to whereby.com">
                 <div class="logo">
-                    <svg width="100%" height="100%" viewBox="0 0 411 316" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M342.17 187.393C342.17 199.26 332.281 208.886 320.216 208.886H66.5222C54.4573 208.886 44.5679 199.194 44.5679 187.393V21.5821C44.5679 9.71491 54.4573 0.0892944 66.5222 0.0892944H320.216C332.281 0.0892944 342.17 9.78084 342.17 21.5821V187.393Z" fill="#38CD8B"></path>
-                      <path d="M276.703 45.3164H21.9543C9.88932 45.3164 0 55.4035 0 67.2707V232.159C0 244.026 9.88932 254.113 21.9543 254.113H95.9264L202.797 315.888V254.113H276.769C288.834 254.113 298.723 244.026 298.723 232.159V67.2707C298.657 55.4694 288.768 45.3164 276.703 45.3164Z" fill="#FF2E63"></path>
-                      <path d="M402.231 207.699L373.552 184.426C367.619 179.613 364.125 172.032 364.125 163.988V44.9209C364.125 36.8775 367.619 29.2957 373.552 24.4829L402.231 1.21006C405.857 -1.75674 411 1.0782 411 5.95693V202.886C411 207.831 405.857 210.6 402.231 207.699Z" fill="#38CD8B"></path>
-                      <path d="M94.8711 100.631L121.177 157.923L149.526 91.4666L178.073 157.923L204.049 100.631H230.025L177.48 208.556L149.46 143.88L121.243 208.49L68.7633 100.565H94.8711V100.631Z" fill="white"></path>
-                    </svg>
+                    <img src="assets/Main_screen.png">
                 </div>
               </a>
-              <span class="room-type-text">
-                FREE
-              </span>
             </div>
-            <div class="room-url-wsrapper" analytics-event="copyUrlAnalyticsEvent" ng-if="isCopyLinkEnabled()">
+            <div class="desktop-view room-url-wsrapper" analytics-event="copyUrlAnalyticsEvent" ng-if="isCopyLinkEnabled()">
               <div class="room-url">
                 <input type="text" class="text user-select-all url inputnull" disabled="disabled" #inputtarget value="{{Url}} ">
                 <!-- <button class="text user-select-all url" #inputtargets value="{{Url}}" >{{Url}}</button> -->
               </div>
-              <div class="copy-button-wrapper buttonset">
+              
+            </div>
+            <div class="desktop-view copy-button-wrapper buttonset">
                 <button (click)="copy(inputtarget)" type="button" class="btn btn-primary btn-sm buttonchng">Copy link</button>
                 <!-- <button class="ui-button ui-button--secondary-color copy-link-text-button" (click)="copy(inputTarget.value)" [ngxclipboard]="inputTarget">Copy link</button> -->
               </div>
-            </div>
-            <div class="room-control-buttons control-button-group jstest-room-controls">
-              <div ng-click="handleRoomModeButtonClick()" class="top-bar-button select-room-mode-button" title="Set room size">
+            <div class="desktop-view room-control-buttons control-button-group jstest-room-controls">
+              <!-- <div ng-click="handleRoomModeButtonClick()" class="top-bar-button select-room-mode-button" title="Set room size">
                 <img class="icon" src="https://d1x2efl61akomv.cloudfront.net/images/room-mode-small.6da5a2b7.svg">
                 <span class="desc">
                   <span>Room size</span>
                 </span>
-              </div>
+              </div> -->
 
               <div data-toggle="modal" data-target="#mic" class="top-bar-button jstest-cam-mic" title="Cam/Mic">
                 <img class="icon" src="https://d1x2efl61akomv.cloudfront.net/images/tools/toolbar-icons.40acd2f6.svg#toolbar-camera">
@@ -134,12 +127,46 @@
             </div>
           </div>
         </header>
-        <div class="container">
-          <div class="col-sm-6" style="top: 30%">
-            <video  class="right" id='localvideo' #localvideo playsinline="playsinline" autoplay="autoplay"></video>
-          </div>
-          <div  class="col-sm-6" style="top: 30%">
-            <video class="right "  id='remotevideo' #remotevideo playsinline="playsinline" autoplay="autoplay"></video>        
+        <div class="mobile-view header-cam"> 
+            <div class="room-url-wsrapper" analytics-event="copyUrlAnalyticsEvent" ng-if="isCopyLinkEnabled()">
+                <div class="room-url">
+                  <input type="text" class="text user-select-all url inputnull" disabled="disabled" #inputtarget value="{{Url}} ">
+                  <!-- <button class="text user-select-all url" #inputtargets value="{{Url}}" >{{Url}}</button> -->
+                </div>
+                
+              </div>
+              <div class="copy-button-wrapper buttonset">
+                  <button (click)="copy(inputtarget)" type="button" class="btn btn-primary btn-sm buttonchng">Copy link</button>
+                  <!-- <button class="ui-button ui-button--secondary-color copy-link-text-button" (click)="copy(inputTarget.value)" [ngxclipboard]="inputTarget">Copy link</button> -->
+                </div>
+              <div class="room-control-buttons control-button-group jstest-room-controls">
+                <!-- <div ng-click="handleRoomModeButtonClick()" class="top-bar-button select-room-mode-button" title="Set room size">
+                  <img class="icon" src="https://d1x2efl61akomv.cloudfront.net/images/room-mode-small.6da5a2b7.svg">
+                  <span class="desc">
+                    <span>Room size</span>
+                  </span>
+                </div> -->
+  
+                <div data-toggle="modal" data-target="#mic" class="top-bar-button jstest-cam-mic" title="Cam/Mic">
+                  <img class="icon" src="https://d1x2efl61akomv.cloudfront.net/images/tools/toolbar-icons.40acd2f6.svg#toolbar-camera">
+                  <!-- <span class="desc">
+                    <span>Cam/Mic</span>
+                  </span> -->
+                </div>
+                <div class="top-bar-button black jstest-room-settings-button" permission="canAccessRoomSettings" ng-click="openRoomSettings()" title="Room settings" style="display: none;">
+                  <img class="icon" src="https://d1x2efl61akomv.cloudfront.net/images/tools/toolbar-icons.40acd2f6.svg#toolbar-settings">
+                  <p class="desc">Settings</p>
+                </div>
+              </div>
+        </div>
+        <div class="container room-content">
+          <div class="row room-content-video">
+              <div class="col-sm-6">
+                  <video  class="right" id='localvideo' #localvideo playsinline="playsinline" autoplay="autoplay"></video>
+                </div>
+                <div  class="col-sm-6">
+                  <video class="right "  id='remotevideo' #remotevideo playsinline="playsinline" autoplay="autoplay"></video>        
+                </div>
           </div>
           <div class="buttonlayout">
             <div class="VideoToolbar-container">
@@ -238,7 +265,7 @@
     <div class="chat_box touchscroll chat_box_colors_a"  *ngFor="let user of usersdata">
       <div class="chat_message_wrapper" *ngIf = 'name != user.username'>
         <div class="chat_user_avatar">
-            <img alt="Gurdeep Osahan (Web Designer)" title="Gurdeep Osahan (Web Designer)" src="{{user.pic}}" class="md-user-image">
+            <img alt="" title="" src="{{user.pic}}" class="md-user-image">
         </div>
         <ul class="chat_message" >
           <li>

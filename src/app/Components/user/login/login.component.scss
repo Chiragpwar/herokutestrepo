@@ -885,17 +885,34 @@ html {
   
 .lbl{
   font-size: 11px;
-    margin-left: -213px;
-    font-weight: 900;
-    font: 16px/1.2 "Open Sans", sans-serif;
+  margin:0 0 5px;  
+  text-align:left;
+  font-weight: 900;
+  font: 16px/1.2 "Open Sans", sans-serif;
 }
 
 .lblfont{
   font: 16px/1.2 "Open Sans", sans-serif !important;
 }
-.right{
-  margin-right: 71%;
-}  
+
+.logo-managr{
+  color: #ff2e63;
+  font-size: 29px;
+  font-family: cursive;
+  font-weight: bold;
+}
+
+h2{ 
+  margin:40px 0 10px;
+  padding:0;
+  display:block;
+}
 
 
-  
+
+@media(max-width:767px){
+  .infoText--KFapb {line-height:normal; font-size:15px;}  
+  .component--1WZyh input { letter-spacing:.15em; padding:0; text-justify:inter-word; display:flex; justify-content:space-between; height:auto; text-align:center;}
+  .h1, h1 {font-size:28px;}
+  h2 {margin:20px 0 10px;}
+}

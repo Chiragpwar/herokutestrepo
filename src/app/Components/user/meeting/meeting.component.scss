@@ -4516,3 +4516,13 @@ button, input, optgroup, select, textarea {
 .deprecationButton--3QebM {
     background-color: #ff2e63;
 }
+.modal-footer{ text-align:center;}
+
+@media(max-width:767px){
+    .choosePlanHeader--3_Wy2 { flex-wrap:wrap; }
+    .choosePlanHelp--Ro-nI{ max-width:100%; text-align:left;}
+    .plan--3OXNg {min-height:initial; margin-top:30px;}
+    
+    .radiusroom, .radius{padding:8px 20px; margin:0; font-size: 15px;}
+    .modal-title { margin:0;}
+}

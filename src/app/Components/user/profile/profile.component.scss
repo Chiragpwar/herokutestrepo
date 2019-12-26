@@ -414,11 +414,9 @@ button, input, optgroup, select, textarea {
         -ms-flex-order: 1;
             order: 1;
 }
-@media (min-width: 768px) {
-.logo--1d42y {
-        width: auto
-}
-    }
+.logo--1d42y { width: 100%}
+.logoContainer--AZi3B { width:100%;}
+a.logo--1d42y  a.googleset { margin-left:auto;}
 .menu--3Jv0M {
     -webkit-box-ordinal-group: 4;
         -ms-flex-order: 3;
@@ -1567,10 +1565,6 @@ button, input, optgroup, select, textarea {
     margin: 0 auto;
 }
 
-.googleset{
-    margin-left: 324% !important;
-}
-
 *:focus {
     outline: none;
 }
@@ -2550,4 +2544,36 @@ label {
     font: 16px/1.2 "Open Sans", sans-serif;
     font-weight: 600;
     font-size: 15px
+}
+.img-logo{
+    height: 43px;
+    width: 62px;
+    padding-right: 8px;
+}
+
+.logo-managr{
+    color: #ff2e63;
+    font-size: 29px;
+    font-family: cursive;
+    font-weight: bold;
+}
+.logoContainer--AZi3B img{
+    max-width:220px;
+    vertical-align:top;
+}
+
+.username{
+    font-weight: 600;
+    font-size: 14px !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
+
+@media(max-width:767px){
+    .navList--BrtpX.hiddenOnMobile--2wSKZ{ visibility: visible; position: relative; width: 100%; top: 0; max-width: 100%; left: 0;}
+    .mainContent--2-IhR { width:100%;}
+    .content--3xGpT{ flex-wrap: wrap; display: flex; width: 100%;}
+    .nav--1iVZQ { width:100%;}
+    .link--3b92h {padding: 8px 17px;}
+    .section--3BdWd + .section--3BdWd{ margin:20px 0 30px;}
 }

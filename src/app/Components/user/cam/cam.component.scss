@@ -353,7 +353,7 @@ a.underline {
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  flex-direction: row;
+  flex-wrap:wrap;
   align-items: stretch;
   align-content: stretch;
   justify-content: space-around;
@@ -379,9 +379,12 @@ a.underline {
   width: 100%;
   overflow: hidden
 }
-.buttonset{
-  margin-left: 200px !important;
-  margin-top: -31px !important;
+.room-url-wsrapper {
+  display: flex;
+  padding:0 15px;
+}
+html body .space .copy-button-wrapper.buttonset[_ngcontent-rju-c1]{
+  display:block !important;
 }
 .inputnull {
   border-block: none;
@@ -1636,7 +1639,7 @@ video.video-stream {
 
 .video-space-header {
   color: #fff;
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -1648,7 +1651,8 @@ video.video-stream {
 
 .video-space-header .control-button-group {
   display: flex;
-  flex-direction: row
+  flex-direction: row;
+  margin:0 0 0 auto;
 }
 
 .video-space-header .control-button-group.room-control-buttons {
@@ -1687,15 +1691,19 @@ video.video-stream {
 }
 
 .video-space-header .logo-wrapper .logo {
-  padding-top: 3px;
+  padding: 0;
   padding-left: 0;
   flex-shrink: 0;
-  height: 100%;
-  width: 38px;
+  height: auto;
+  width: auto;
   cursor: pointer;
-  margin-left: 4px;
-  margin-right: 2px
+  margin: 0;
 }
+.video-space-header .logo-wrapper .logo img{
+  max-height: 56px;
+  max-width: 200px
+}
+
 
 .video-space-header .logo-wrapper .custom-logo {
   flex-shrink: 0;
@@ -1821,7 +1829,6 @@ video.video-stream {
   .room-url-wrapper .room-url {
       width: auto
   }
-  .video-space-header .copy-button-wrapper,
   .video-space-header .top-bar-button .desc {
       display: none!important
   }
@@ -5038,8 +5045,45 @@ ai-avatar {
   object-fit: cover
 }
 .buttonlayout{
-  margin-top: 50%;
-    margin-left: 25%;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.room-content{
+  height:calc(100% - 90px);
+  display: flex;
+  flex-direction: column;
+}
+.room-content-video{
+  height:calc(100% - 80px);
+}
+.room-content-video .col-sm-6{
+  height:80%;
+}
+.room-content-video .col-sm-6 video{
+  height:100%;
+}
+.room-content .VideoToolbar-container{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+}
+.room-content .VideoToolbar-itemGroup{
+  display: flex;
+  background-color: rgba(13, 22, 36, 0.5);
+  margin: 0 1px;
+  border-radius: 2px 2px 0 0;
+  overflow: visible;
+  width: 100%;
+  justify-content: space-between;
+}
+.room-content .buttonlayout{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
 }
 
 
@@ -5360,6 +5404,21 @@ img {
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
+.VideoToolbar-item {height: auto;padding: 14px 8px 10px;}
+.mobile-view{ display:none;}
+.desktop-view{ display:block;}
+.modal-content.sethight video{ width:100%;}
+.centered.help-text{ text-align:left;}
+.videosec .col-md-6,
+.camsec .col-md-6{ margin-bottom:10px;}
+.videosec .col-md-6 h3,
+.camsec .col-md-6 h3{ font-size:16px;}
+.sethight{height: auto;}
+.footerchnag{ top:0; text-align:left;}
+
+
+.room-content .VideoToolbar-itemGroup{background-color: transparent; justify-content: center;}
+.VideoToolbar-item {background: rgba(0,0,0,.5); border-radius: 6px; margin: 0 4px;}
 
 /* Safari */
 @-webkit-keyframes spin {
@@ -5371,3 +5430,31 @@ img {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+@media(max-width:767px){
+  .room-content .VideoToolbar-itemGroup{ padding:0 5px; background:rgba(0, 0, 0, 0.5);justify-content: space-between;}
+  .VideoToolbar-itemText {min-width: inherit; }
+  .VideoToolbar-item {padding:14px 0 10px; min-width:initial; background:transparent ;}
+  .VideoToolbar-itemIcon {height: auto; max-height: 28px;}
+  .room-content{padding-bottom: 76px;}
+  .popup-box-on{ height:100%; width:100%; right:0;}
+  .chat_box_wrapper.chat_box_small.chat_box_active{  height:calc(100% - 125px); overflow-y:scroll; width:100%;}
+  .emoji-mart-preview {height: 60px;}
+  .mobile-view{ display:block;}
+  .desktop-view{ display:none;}
+  .desktop-view.room-control-buttons.control-button-group{ display:none;}
+  .header-cam.mobile-view {display: flex;width: 100%;flex-wrap: wrap; align-items:center; margin:-30px 0 20px;}
+  .header-cam .copy-button-wrapper{ margin:0 15px 0 0;}
+  .header-cam .buttonchng{ margin:0;}
+  .header-cam input.url {margin:0 !important; color:#fff; line-height:32px;}
+  .header-cam .top-bar-button .icon{ margin:0;}
+  .header-cam .top-bar-button{padding: 0; min-width:20px;}
+  .room-content-video .col-sm-6{ height:auto;}
+
+  
+}
+
+@media(max-width:499px){
+    .VideoToolbar-itemText {font-size: 10px;}
+}
+

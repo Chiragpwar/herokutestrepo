@@ -58,7 +58,7 @@
                 <span>Work Email</span><span class="hs-form-required">*</span></label>
               <div class="input"><input [(ngModel)]="Contactus.WorkEmail" #WorkEmail="ngModel" class="hs-input" type="email" name="WorkEmail" ></div>
               <div class="invalid-feedback">
-                <div *ngIf="WorkEmail.errors.required">Work Email is required</div>
+                <!-- <div *ngIf="WorkEmail.errors.required">Work Email is required</div> -->
             </div>
             </div>
           </fieldset>
@@ -73,17 +73,17 @@
             <div class="hs_firstname hs-firstname hs-fieldtype-text field hs-form-field">
               <label class="" placeholder="Enter your First name">
                 <span data-reactid=".hbspt-forms-0.1:$2.1:$firstname.0.0">First name</span><span class="hs-form-required" data-reactid=".hbspt-forms-0.1:$2.1:$firstname.0.1">*</span></label>
-              <div class="input"><input  class="hs-input" type="text" [(ngModel)]="Contactus.FirstName" #FirstName="ngModel" required   class="hs-input" type="text" name="FirstName"></div>
+              <div class="input"><input  class="hs-input" type="text" [(ngModel)]="Contactus.FirstName" #FirstName="ngModel"    class="hs-input" type="text" name="FirstName"></div>
               <div  class="invalid-feedback">
-                <div *ngIf="FirstName.errors.required">First name is required</div>
+                <!-- <div *ngIf="FirstName.errors.required">First name is required</div> -->
             </div>
             </div>
             <div class="hs_lastname hs-lastname hs-fieldtype-text field hs-form-field">
               <label  class="" placeholder="Enter your Last name">
                 <span>Last name</span><span class="hs-form-required">*</span></label>
-              <div class="input"><input class="hs-input" type="text" [(ngModel)]="Contactus.LastName" #LastName="ngModel"  required   class="hs-input" type="text" name="LastName" ></div>
+              <div class="input"><input class="hs-input" type="text" [(ngModel)]="Contactus.LastName" #LastName="ngModel"     class="hs-input" type="text" name="LastName" ></div>
               <div class="invalid-feedback">
-                <div *ngIf="LastName.errors.required">Last name is required</div>
+                <!-- <div *ngIf="LastName.errors.required">Last name is required</div> -->
             </div>
             </div>
           </fieldset>
@@ -205,7 +205,7 @@
       </div>
       <div class="lp-element lp-pom-image" id="lp-pom-image-308">
         <div class="lp-pom-image-container" style="overflow: hidden;">
-          <img src="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_03n03d000000000000001.png" alt="" data-src-desktop-1x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_03n03d000000000000001.png" data-src-desktop-2x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_07a06q000000000000001.png" data-src-desktop-3x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_0ax0a3000000000000001.png" data-src-mobile-1x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_03n03d000000000000001.png" data-src-mobile-2x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_07a06q000000000000001.png" data-src-mobile-3x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_0ax0a3000000000000001.png" srcset="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_03n03d000000000000001.png 1x, //d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_07a06q000000000000001.png 2x, //d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/ff485a97-screen-shot-2019-01-17-at-7-13-14-pm_0ax0a3000000000000001.png 3x"></div>
+            <img src="assets/icon.png" alt="Skúli A. " data-src-desktop-1x="assets/icon.png" data-src-desktop-2x="assets/icon.png" data-src-desktop-3x="assets/icon.png" data-src-mobile-1x="assets/icon.png" data-src-mobile-2x="assets/icon.png" data-src-mobile-3x="assets/icon.png" title="Skúli A. " srcset="assets/icon.png"></div>
       </div>
       <div class="lp-element lp-pom-image" id="lp-pom-image-309">
         <div class="lp-pom-image-container" style="overflow: hidden;">
@@ -249,7 +249,7 @@
             <span style="font-style: normal;">
               <span style="font-weight: 400;">
                 <span>
-                  <strong>Skúli A.&nbsp;</strong></span></span>
+                  <strong>User A&nbsp;</strong></span></span>
             </span>
           </span>
           <br>
@@ -264,7 +264,7 @@
             <span style="font-style: normal;">
               <span style="font-weight: 400;">
                 <span style="font-family: Open Sans;">
-                  <strong>Michael S.&nbsp;</strong></span></span>
+                  <strong>User B&nbsp;</strong></span></span>
             </span>
           </span>
           <br>
@@ -301,7 +301,7 @@
             <span style="font-style: normal;">
               <span style="font-weight: 400;">
                 <span >
-                  <em>(Whereby) is great because clients don't have to download any special software, they just need to click the branded link that I send them and we are ready to connect - this is especially important as some of my clients are not tech savvy. It is also great to be able to screen share and connect with more than one person at a time.</em></span></span>
+                  <em>(EasyMeet) is great because clients don't have to download any special software, they just need to click the branded link that I send them and we are ready to connect - this is especially important as some of my clients are not tech savvy. It is also great to be able to screen share and connect with more than one person at a time.</em></span></span>
             </span>
           </span>
         </p>
@@ -311,7 +311,7 @@
       </div>
       <div class="lp-element lp-pom-image" id="lp-pom-image-315">
         <div class="lp-pom-image-container" style="overflow: hidden;">
-          <img src="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_03o03h000000000000001.png" alt="" data-src-desktop-1x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_03o03h000000000000001.png" data-src-desktop-2x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_07c06y000000000000001.png" data-src-desktop-3x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_000000000000000000001.png" data-src-mobile-1x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_03o03h000000000000001.png" data-src-mobile-2x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_07c06y000000000000001.png" data-src-mobile-3x="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_000000000000000000001.png" srcset="//d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_03o03h000000000000001.png 1x, //d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_07c06y000000000000001.png 2x, //d9hhrg4mnvzow.cloudfront.net/getstarted.whereby.com/contact-us-appearin-business/f23f9512-screen-shot-2019-01-17-at-7-19-16-pm_000000000000000000001.png 3x"></div>
+            <img src="assets/icon.png" alt="Skúli A. " data-src-desktop-1x="assets/icon.png" data-src-desktop-2x="assets/icon.png" data-src-desktop-3x="assets/icon.png" data-src-mobile-1x="assets/icon.png" data-src-mobile-2x="assets/icon.png" data-src-mobile-3x="assets/icon.png" title="Skúli A. " srcset="assets/icon.png"></div>
       </div>
     </div>
   </div>

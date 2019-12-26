@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent implements OnInit, OnDestroy  {
 
   constructor(private Route: Router, private route: ActivatedRoute,  public service: AuthServices,
-              public tostr: ToastrService) { }
+              public tostr: ToastrService) { this.getOwnerroom(); }
   userImage = false;
   pic: any;
   name: string;
@@ -24,10 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy  {
   subscriptions: Subscription[] = [];
   connectionStatusMessage: string;
   connectionStatus: string;
-  
-  ngOnInit() {
-    this.getOwnerroom();
 
+  ngOnInit() {
     this.onlineEvent = fromEvent(window, 'online');
     this.offlineEvent = fromEvent(window, 'offline');
 

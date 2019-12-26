@@ -19,6 +19,7 @@ export class ContactsaleComponent implements OnInit {
 
   SendMail() {
     this.service.Contactusmail(this.Contactus).subscribe(response => {
+      this.Contactus = null;
     });
   }
 
