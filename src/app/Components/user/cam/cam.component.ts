@@ -162,14 +162,14 @@ export class CamComponent implements OnInit {
       setTimeout(() => {
         video.poster = '';
       }, 8000);
-      video.style.height = '269px';
+      video.style.height = '100%';
     } else {
       const video: HTMLVideoElement = this.localvideo.nativeElement;
       video.poster = val.poster.poster;
       setTimeout(() => {
         video.poster = '';
       }, 8000);
-      video.style.height = '269px';
+      video.style.height = '100%';
     }
     });
 
@@ -183,11 +183,11 @@ export class CamComponent implements OnInit {
       if (val.val.Player === 'Local') {
         const video: HTMLVideoElement = this.localvideo.nativeElement;
         video.src = val.val.MediaStream;
-        video.style.height = '269px';
+        video.style.height = '100%';
        } else {
         const video: HTMLVideoElement = this.remotevideo.nativeElement;
         video.src = val.val.MediaStream;
-        video.style.height = '269px';
+        video.style.height = '100%';
        }
      }
     });
@@ -365,7 +365,6 @@ async Liverecords() {
      // tslint:disable-next-line: only-arrow-functions
     await this.recordRTC.getDataURL(function(dataURL) {
       url = dataURL;
-      console.log(url);
     });
   }, 6000);
 
