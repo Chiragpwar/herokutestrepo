@@ -256,6 +256,7 @@ async getip() {
     } else {
       this.name =  this.Currentowner;
     }
+      console.log('GetIP entr', this.name);
       pc.onicecandidate = () => {};
       pc.close();
     });
@@ -325,25 +326,25 @@ async Screenshare() {
 }
 
 
-ClearSharedata() {
-  const recordRTC = this.recordRTC;
-  clearInterval(this.app);
-  recordRTC.clearRecordedData();
-  return false;
-}
-
 // ClearSharedata() {
 //   const recordRTC = this.recordRTC;
 //   clearInterval(this.app);
 //   recordRTC.clearRecordedData();
-//   this.socket.emit('stopScreen', {
-//     screen : 'screen'
-//    });
-//   this.socket.emit('sharescreen', {
-//     MediaStream : null
-//    });
 //   return false;
 // }
+
+ClearSharedata() {
+  const recordRTC = this.recordRTC;
+  clearInterval(this.app);
+  recordRTC.clearRecordedData();
+  this.socket.emit('stopScreen', {
+    screen : 'screen'
+   });
+  this.socket.emit('sharescreen', {
+    MediaStream : null
+   });
+  return false;
+}
 
 
 
@@ -766,6 +767,7 @@ videoclose() {
         this.name = this.currentUser.name;
         this.pic = this.currentUser.photoUrl;
       }
+      console.log('Eneter function chat', this.name);
       this.now = new Date();
       this.unreadmsg = true;
       this.submitmessage.nativeElement.value = '';
