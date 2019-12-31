@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {User} from '../../../modals/modal';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -19,13 +19,14 @@ export class SignupComponent implements OnInit {
   user = new User();
 
   constructor(public authService: AuthService, public route: Router, public service: AuthServices, public toastr: ToastrService,
-              public  afAuth: AngularFireAuth) { }
+              public  afAuth: AngularFireAuth, public spinner: NgxSpinnerService ) { }
 
   ngOnInit() {
 
   }
 
   async  signInWithGoogle() {
+    this.spinner.show();
     await  this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(x => {
       this.user.firstName = x.user.displayName.split(' ')[0];
       this.user.lastName = x.user.displayName.split(' ')[1];
@@ -34,6 +35,7 @@ export class SignupComponent implements OnInit {
       this.user.photoUrl = x.user.photoURL;
       this.user.provider = x.credential.signInMethod;
       this.service.AddUser(this.user).subscribe(Response => {
+        this.spinner.hide();
         // tslint:disable-next-line: no-string-literal
         if (Response['user'] === 'user already register') {
           this.toastr.warning('This email is already registered. Try logging in');
@@ -41,6 +43,8 @@ export class SignupComponent implements OnInit {
           this.toastr.info('you need to login For next step');
         }
       });
+    }).catch((e) => {
+      this.spinner.hide();
     });
 
 
@@ -56,15 +60,17 @@ export class SignupComponent implements OnInit {
     }
 
   public SignUp(name, Email) {
+     this.spinner.show();
      this.user.name = name;
      this.user.email = Email.toLowerCase();
      this.service.AddUser(this.user).subscribe(Response => {
+     this.spinner.hide();
       // tslint:disable-next-line: no-string-literal
-      if (Response['user'] === 'user already register') {
+     if (Response['user'] === 'user already register') {
         this.toastr.warning('This email is already registered. Try logging in');
       }
        // tslint:disable-next-line: no-string-literal
-      if (Response['user'].indexOf('code') > 0) {
+     if (Response['user'].indexOf('code') > 0) {
         this.verification = false;
       // tslint:disable-next-line: no-string-literal
         this.toastr.info(Response['user']);

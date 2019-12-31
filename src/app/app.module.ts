@@ -53,7 +53,7 @@ const socketconfig: SocketIoConfig = {
   url: 'https://wherebybackend.herokuapp.com/',
   options: {}
 };
-// http://localhost:3000/
+// https://wherebybackend.herokuapp.com/
 const config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
