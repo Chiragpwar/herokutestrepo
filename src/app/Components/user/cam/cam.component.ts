@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, ElementRef, NgZone} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, NgZone, HostListener} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {Chatroom, Mediastream} from '../../../modals/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -188,8 +188,23 @@ export class CamComponent implements OnInit {
     });
 
     this.socket.on('streaming', (val) => {
-        this.calltest(val);
+      this.calltest(val);
+ });
+
+    this.socket.on('meetingend', (val) => {
+    this.toastr.info(`${val.stream} has end the meeting`);
     });
+
+    this.socket.on('leftstream', (val) => {
+      this.toastr.info(`${val.name} has end the meeting`);
+      if (this.currentUser != null) {
+        const video: HTMLVideoElement = this.remotevideo.nativeElement;
+        video.srcObject = val.stream;
+       } else {
+        const video: HTMLVideoElement = this.localvideo.nativeElement;
+        video.srcObject = val.stream;
+       }
+      });
 
     this.socket.on('calluser', (val) => {
      // this.start();
@@ -541,35 +556,34 @@ videoclose() {
   }
 
  async gotStream(stream) {
-  if (this.currentUser != null) {
-   this.Calluser(stream , 'Local');
-   this.app =  setInterval(() => {
-      this.Calluser(stream, 'Local');
-   }, 20000);
+  // if (this.currentUser != null) {
+  //  this.Calluser(stream , 'Local');
+  //  this.app =  setInterval(() => {
+  //     this.Calluser(stream, 'Local');
+  //  }, 20000);
 
-   this.localvideodata = stream;
-   this.localvideo.nativeElement.srcObject = stream;
-   this.localvideo.nativeElement.style.height = '100%';
-   // this.remotevideo.nativeElement.srcObject = this.remotevideodata.source._value;
-  } else {
-    this.Calluser(stream, 'Remote');
-    this.app =  setInterval(() => {
-      this.Calluser(stream, 'Remote');
-   }, 20000);
-    this.remotevideodata = stream;
-    this.remotevideo.nativeElement.srcObject = stream;
-    this.remotevideo.nativeElement.style.height = '100%';
- //   this.localvideo.nativeElement.srcObject = this.localvideodata.source._value;
-  }
-    //  this.localStream = stream;
-    //  if (this.currentUser != null) {
-    //   this.localvideo.nativeElement.srcObject = stream;
-    // //  this.call();
-    //  } else {
-    //   this.remotevideo.nativeElement.srcObject = stream;
-    //   this.call();
-    //  }
-  this.videoModal.nativeElement.srcObject =  this.localStream;
+  //  this.localvideodata = stream;
+  //  this.localvideo.nativeElement.srcObject = stream;
+  //  this.localvideo.nativeElement.style.height = '100%';
+  //  // this.remotevideo.nativeElement.srcObject = this.remotevideodata.source._value;
+  // } else {
+  //   this.Calluser(stream, 'Remote');
+  //   this.app =  setInterval(() => {
+  //     this.Calluser(stream, 'Remote');
+  //  }, 20000);
+  //   this.remotevideodata = stream;
+  //   this.remotevideo.nativeElement.srcObject = stream;
+  //   this.remotevideo.nativeElement.style.height = '100%';
+  // }
+     this.localStream = stream;
+     if (this.currentUser != null) {
+      this.localvideo.nativeElement.srcObject = stream;
+    //  this.call();
+     } else {
+      this.remotevideo.nativeElement.srcObject = stream;
+      this.call();
+     }
+     this.videoModal.nativeElement.srcObject =  this.localStream;
   }
 
     start() {
@@ -586,27 +600,17 @@ videoclose() {
 
 
   calltest(val) {
+    this.pc1 = new RTCPeerConnection(this.conf);
     this.pc1.onicecandidate = e => {
-      this.onIceCandidate(this.pc1, e);
-    };
+        this.onIceCandidate(this.pc1, e);
+      };
+    this.pc2 = new RTCPeerConnection(this.conf);
     this.pc2.onicecandidate = e => {
-      this.onIceCandidate(this.pc2, e);
-    };
-
-    if (val.Stream.pc1 != null) {
-      this.pc1.setLocalDescription(val.Stream.pc1).then(
-        () => {
-          this.onSetLocalSuccess(this.pc1);
-        },
-        this.onSetSessionDescriptionError.bind(this)
-      );
-      this.pc1.createOffer(
-        this.offerOptions
-      ).then(
-        this.onCreateOfferSuccess.bind(this),
-        this.onCreateSessionDescriptionError.bind(this)
-      );
-      this.localStream.getTracks().forEach(
+        this.onIceCandidate(this.pc2, e);
+      };
+    if (this.localvideo.nativeElement.srcObject == null) {
+        if (val.Stream.pc2 != null) {
+          this.localStream.getTracks().forEach(
             track => {
               this.pc2.addTrack(
                 track,
@@ -614,20 +618,23 @@ videoclose() {
                 );
               }
               );
-      this.pc1.ontrack = this.gotlocalStream.bind(this);
+          this.pc2.createOffer(
+                this.offerOptions
+              ).then(
+                this.onCreateOfferSuccessCallTest.bind(this),
+                this.onCreateSessionDescriptionError.bind(this)
+              );
+          this.pc1.ontrack = this.gotlocalStream.bind(this);
+      }
     } else {
-      this.pc2.setLocalDescription(val.Stream.pc2).then(
-        () => {
-          this.onSetLocalSuccess(this.pc2);
-        },
-        this.onSetSessionDescriptionError.bind(this)
-      );
-      this.pc2.createOffer(
-        this.offerOptions
-      ).then(
-        this.onCreateOfferSuccess.bind(this),
-        this.onCreateSessionDescriptionError.bind(this)
-      );
+      // this.pc1 = new RTCPeerConnection(this.conf);
+      // this.pc1.onicecandidate = e => {
+      //   this.onIceCandidate(this.pc1, e);
+      // };
+      // this.pc2 = new RTCPeerConnection(this.conf);
+      // this.pc2.onicecandidate = e => {
+      //   this.onIceCandidate(this.pc2, e);
+      // };
       this.localStream.getTracks().forEach(
         track => {
           this.pc1.addTrack(
@@ -636,9 +643,90 @@ videoclose() {
             );
           }
           );
+      this.pc1.createOffer(
+            this.offerOptions
+          ).then(
+            this.onCreateOfferSuccessCallTestRemote.bind(this),
+            this.onCreateSessionDescriptionError.bind(this)
+          );
       this.pc2.ontrack = this.gotRemoteStream.bind(this);
+
     }
 }
+
+onCreateOfferSuccessCallTest(desc) {
+  this.pc2.setLocalDescription(desc).then(
+    () => {
+      this.onSetLocalSuccess(this.pc1);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+  this.pc1.setRemoteDescription(desc).then(
+    () => {
+      this.onSetRemoteSuccess(this.pc2);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+  this.pc1.createAnswer().then(
+    this.onCreateAnswerSuccesscallTest.bind(this),
+    this.onCreateSessionDescriptionError.bind(this)
+  );
+}
+
+
+onCreateOfferSuccessCallTestRemote(desc) {
+  this.pc1.setLocalDescription(desc).then(
+    () => {
+      this.onSetLocalSuccess(this.pc1);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+  this.pc2.setRemoteDescription(desc).then(
+    () => {
+      this.onSetRemoteSuccess(this.pc2);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+  this.pc2.createAnswer().then(
+    this.onCreateAnswerSuccesscallTestRemote.bind(this),
+    this.onCreateSessionDescriptionError.bind(this)
+  );
+}
+
+onCreateAnswerSuccesscallTestRemote(desc) {
+  this.pc2.setLocalDescription(desc).then(
+    () => {
+      this.onSetLocalSuccess(this.pc2);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+  this.trace('pc1 setRemoteDescription start');
+  this.pc1.setRemoteDescription(desc).then(
+    () => {
+      this.onSetRemoteSuccess(this.pc1);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+}
+
+onCreateAnswerSuccesscallTest(desc) {
+  this.pc1.setLocalDescription(desc).then(
+    () => {
+      this.onSetLocalSuccess(this.pc1);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+  this.trace('pc1 setRemoteDescription start');
+  this.pc2.setRemoteDescription(desc).then(
+    () => {
+      this.onSetRemoteSuccess(this.pc2);
+    },
+    this.onSetSessionDescriptionError.bind(this)
+  );
+}
+
+
+
 
   call() {
     this.startTime = window.performance.now();
@@ -650,16 +738,15 @@ videoclose() {
     this.trace('Created remote peer connection object pc2');
     this.pc2.onicecandidate = e => {
       this.onIceCandidate(this.pc2, e);
-    //  console.log(await this.pc2.setRemoteDescription(description));
     };
    // this.pc1.onnegotiationneeded = this.handleNegotiationNeededEvent;
 
-    // this.pc1.oniceconnectionstatechange = e => {
-    //   this.onIceStateChange(this.pc1, e);
-    // };
-    // this.pc2.oniceconnectionstatechange = e => {
-    //   this.onIceStateChange(this.pc2, e);
-    // };
+    this.pc1.oniceconnectionstatechange = e => {
+      this.onIceStateChange(this.pc1, e);
+    };
+    this.pc2.oniceconnectionstatechange = e => {
+      this.onIceStateChange(this.pc2, e);
+    };
 
     this.localStream.getTracks().forEach(
       track => {
@@ -715,13 +802,11 @@ videoclose() {
   }
 
   onSetLocalSuccess(pc) {
-   // this.socket.emit('streaming', this.pc1);
-    this.trace(this.getName(pc) + ' setLocalDescription complete');
+  // this.socket.emit('streaming', this.pc1);
   }
 
   onSetRemoteSuccess(pc) {
-  //  this.socket.emit('streaming', this.pc2);
-    this.trace(this.getName(pc) + ' setRemoteDescription complete');
+  // this.socket.emit('streaming', this.pc2);
   }
 
   onSetSessionDescriptionError(error) {
@@ -785,7 +870,7 @@ videoclose() {
   onIceStateChange(pc, event) {
     if (pc) {
   //    this.socket.emit('streaming', this.pc);
-      this.trace(this.getName(pc) + ' ICE state: ' + pc.iceConnectionState);
+      console.log(this.getName(pc) + ' ICE state: ' + pc.iceConnectionState);
       console.log('ICE state change event: ', event);
     }
   }
@@ -882,11 +967,14 @@ videoclose() {
   if (stream != null) {
     stream.getAudioTracks().forEach(track => track.stop());
     stream.getVideoTracks().forEach(track => track.stop());
-    clearInterval(this.app);
+  //  clearInterval(this.app);
     this.socket.emit('CloseStream', {
-      stream: null
-     });
-    recordRTC.clearRecordedData();
+      stream : null
+    });
+    this.socket.emit('meetingend', {
+      name : this.name
+    });
+  //  recordRTC.clearRecordedData();
   }
   if (this.currentUser != null) {
       this.Routes.navigate(['/user/feedback']);
@@ -894,5 +982,16 @@ videoclose() {
       this.Routes.navigate(['user/leave-room']);
     }
   }
+
+  // Browser close
+
+  @HostListener('window:unload', ['$event'])
+     public beforeunloadHandler($event) {
+
+     this.socket.emit('leftstream', {
+          stream : null,
+          name: this.name
+        });
+    }
 
 }
