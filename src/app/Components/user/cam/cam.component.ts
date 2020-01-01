@@ -556,34 +556,34 @@ videoclose() {
   }
 
  async gotStream(stream) {
-  // if (this.currentUser != null) {
-  //  this.Calluser(stream , 'Local');
-  //  this.app =  setInterval(() => {
-  //     this.Calluser(stream, 'Local');
-  //  }, 20000);
+  if (this.currentUser != null) {
+   this.Calluser(stream , 'Local');
+   this.app =  setInterval(() => {
+      this.Calluser(stream, 'Local');
+   }, 20000);
 
-  //  this.localvideodata = stream;
-  //  this.localvideo.nativeElement.srcObject = stream;
-  //  this.localvideo.nativeElement.style.height = '100%';
-  //  // this.remotevideo.nativeElement.srcObject = this.remotevideodata.source._value;
-  // } else {
-  //   this.Calluser(stream, 'Remote');
-  //   this.app =  setInterval(() => {
-  //     this.Calluser(stream, 'Remote');
-  //  }, 20000);
-  //   this.remotevideodata = stream;
-  //   this.remotevideo.nativeElement.srcObject = stream;
-  //   this.remotevideo.nativeElement.style.height = '100%';
-  // }
-     this.localStream = stream;
-     if (this.currentUser != null) {
-      this.localvideo.nativeElement.srcObject = stream;
-    //  this.call();
-     } else {
-      this.remotevideo.nativeElement.srcObject = stream;
-      this.call();
-     }
-     this.videoModal.nativeElement.srcObject =  this.localStream;
+   this.localvideodata = stream;
+   this.localvideo.nativeElement.srcObject = stream;
+   this.localvideo.nativeElement.style.height = '100%';
+   // this.remotevideo.nativeElement.srcObject = this.remotevideodata.source._value;
+  } else {
+    this.Calluser(stream, 'Remote');
+    this.app =  setInterval(() => {
+      this.Calluser(stream, 'Remote');
+   }, 20000);
+    this.remotevideodata = stream;
+    this.remotevideo.nativeElement.srcObject = stream;
+    this.remotevideo.nativeElement.style.height = '100%';
+  }
+    //  this.localStream = stream;
+    //  if (this.currentUser != null) {
+    //   this.localvideo.nativeElement.srcObject = stream;
+    // //  this.call();
+    //  } else {
+    //   this.remotevideo.nativeElement.srcObject = stream;
+    //   this.call();
+    //  }
+  this.videoModal.nativeElement.srcObject =  this.localStream;
   }
 
     start() {
